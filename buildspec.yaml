@@ -13,8 +13,8 @@ phases:
   build:
     commands:
       - mvn package
-      - echo $APP_REPO
-      - docker build -t $APP_REPO:latest .
+      - echo $(APP_REPO)
+      - docker build -t $(APP_REPO):latest .
   post_build:
     commands:
-      - docker push $APP_REPO:latest
+      - docker push $(APP_REPO):latest
