@@ -1,0 +1,19 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      java: openjdk11
+      docker: 18
+    commands:
+      - mvn clean install
+  pre_build:
+    commands:
+      - $(aws ecr get-login --no-include-email --region $AWS_REGION)
+  build:
+    commands:
+      - mvn package
+      - docker build -t $APP_REPO:latest .
+  post_build:
+    commands:
+      - docker push $APP_REPO:latest
