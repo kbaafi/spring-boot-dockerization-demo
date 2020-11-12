@@ -11,7 +11,7 @@ phases:
     commands:
       - mvn package
       - echo 'getting files from s3'
-      - aws s3api get-object --bucket kbaafi-buildspec-demo --key myzippy.zip
+      - aws s3 cp s3://kbaafi-buildspec-demo/myzippy.zip .
       - echo 'unzipping myzippy.zip.....'
       - unzip myzippy.zip
       - echo 'listing files.....'
