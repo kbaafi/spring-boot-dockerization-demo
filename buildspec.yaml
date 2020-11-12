@@ -10,7 +10,12 @@ phases:
   build:
     commands:
       - mvn package
-      - echo $APP_REPO
+      - echo 'getting files from s3'
+      - aws s3api get-object --bucket kbaafi-buildspec-demo --key myzippy.zip
+      - echo 'unzipping myzippy.zip.....'
+      - unzip myzippy.zip
+      - echo 'listing files.....'
+      - ls
 
   post_build:
     commands:
